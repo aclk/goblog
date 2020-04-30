@@ -2,7 +2,7 @@ module github.com/callistaenterprise/goblog/accountservice
 
 go 1.12
 
-replace github.com/callistaenterprise/goblog/common => /Users/eriklupander/privat/cadec2017/src/github.com/callistaenterprise/goblog/common
+replace github.com/callistaenterprise/goblog/common => /Users/arvin.he/work/github/goblog/common
 
 require (
 	github.com/alexflint/go-arg v1.0.0

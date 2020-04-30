@@ -2,6 +2,8 @@ FROM alpine:latest
 
 EXPOSE 6767
 
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
 RUN apk --update add \
     curl \
 	tzdata \
