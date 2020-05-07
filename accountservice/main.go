@@ -3,9 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/callistaenterprise/goblog/accountservice/config"
-	"github.com/callistaenterprise/goblog/accountservice/dbclient"
-	"github.com/callistaenterprise/goblog/accountservice/service"
+
+	"github.com/aclk/goblog/accountservice/config"
+	"github.com/aclk/goblog/accountservice/dbclient"
+	"github.com/aclk/goblog/accountservice/service"
 	"github.com/spf13/viper"
 )
 

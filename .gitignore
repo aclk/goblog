@@ -6,6 +6,7 @@
 # Folders
 _obj
 _test
+*/target/*
 
 # Architecture specific extensions/prefixes
 *.[568vq]
@@ -33,3 +34,8 @@ healthchecker/healthchecker-linux-amd64
 
 build
 .gradle
+
+support/config-server/bin*
+.classpath
+.project
+.settings

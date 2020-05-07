@@ -1,4 +1,4 @@
-package se.callistaenterprise.goblog
+package se.aclk.goblog
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
@@ -11,8 +11,8 @@ object Scenarios {
 
 	/*
 	 *	HTTP scenarios
-     */	
-	
+     */
+
 	// Browse
 	val browse_guids = csv("accounts.csv").circular
 	val scn_Browse = scenario("GetAccounts")
