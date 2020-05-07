@@ -1,13 +1,14 @@
 package service
 
 import (
-        . "github.com/smartystreets/goconvey/convey"
-        "testing"
-        "net/http/httptest"
-        "github.com/callistaenterprise/goblog/accountservice/dbclient"
-        "github.com/callistaenterprise/goblog/accountservice/model"
-        "fmt"
-        "encoding/json"
+	"encoding/json"
+	"fmt"
+	"net/http/httptest"
+	"testing"
+
+	"github.com/aclk/goblog/accountservice/dbclient"
+	"github.com/aclk/goblog/accountservice/model"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 
