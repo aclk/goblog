@@ -53,7 +53,10 @@ swarm-prometheus-discovery
 build
 .gradle
 
-token.txt
+*/target/*
+.classpath
+.settings
+.project
 
 loadtest/loadtest
 loadtest/target

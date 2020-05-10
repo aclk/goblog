@@ -1,17 +1,17 @@
 package main
 
 import (
-	"github.com/callistaenterprise/goblog/accountservice/cmd"
+	"github.com/aclk/goblog/accountservice/cmd"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/aclk/goblog/accountservice/internal/app/service"
+	cb "github.com/aclk/goblog/common/circuitbreaker"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/aclk/goblog/common/tracing"
 	"github.com/alexflint/go-arg"
-	"github.com/callistaenterprise/goblog/accountservice/internal/app/service"
-	cb "github.com/callistaenterprise/goblog/common/circuitbreaker"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/callistaenterprise/goblog/common/tracing"
 	"github.com/sirupsen/logrus"
 )
 

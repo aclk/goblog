@@ -1,7 +1,7 @@
 package monitoring
 
 import (
-	"github.com/callistaenterprise/goblog/common/router"
+	"github.com/aclk/goblog/common/router"
 	"github.com/prometheus/client_golang/prometheus"
 	"net/http"
 	"strconv"

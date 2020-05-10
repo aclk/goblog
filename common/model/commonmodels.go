@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/callistaenterprise/goblog/common/util"
+	"github.com/aclk/goblog/common/util"
 	"github.com/jinzhu/gorm"
 	"github.com/twinj/uuid"
 	"strings"

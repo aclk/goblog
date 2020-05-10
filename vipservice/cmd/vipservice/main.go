@@ -25,11 +25,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/vipservice/cmd"
+	"github.com/aclk/goblog/vipservice/internal/app/service"
 	"github.com/alexflint/go-arg"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/vipservice/cmd"
-	"github.com/callistaenterprise/goblog/vipservice/internal/app/service"
 	"github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"
 	"os"

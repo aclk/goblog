@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/callistaenterprise/goblog/common/model"
+	"github.com/aclk/goblog/common/model"
 )
 
 // The accountservice defines types only it knows about. The AccountData and AccountImage types are pulled

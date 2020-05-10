@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"context"
-	"github.com/callistaenterprise/goblog/common/tracing"
+	"github.com/aclk/goblog/common/tracing"
 	"github.com/opentracing/opentracing-go"
 	"github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"

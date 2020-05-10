@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/dataservice/cmd"
+	"github.com/aclk/goblog/dataservice/internal/app/dbclient"
+	"github.com/aclk/goblog/dataservice/internal/app/service"
 	"github.com/alexflint/go-arg"
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/dataservice/cmd"
-	"github.com/callistaenterprise/goblog/dataservice/internal/app/dbclient"
-	"github.com/callistaenterprise/goblog/dataservice/internal/app/service"
 	"github.com/sirupsen/logrus"
 	"os"
 	"os/signal"

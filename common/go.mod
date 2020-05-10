@@ -1,12 +1,11 @@
-module github.com/callistaenterprise/goblog/common
+module github.com/aclk/goblog/common
 
-go 1.12
+go 1.13
 
 require (
 	github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5
 	github.com/confluentinc/confluent-kafka-go v1.0.0
 	github.com/eapache/go-resiliency v1.2.0
-	github.com/go-logfmt/logfmt v0.4.0 // indirect
 	github.com/jinzhu/gorm v1.9.10
 	github.com/myesui/uuid v1.0.0 // indirect
 	github.com/opentracing-contrib/go-observer v0.0.0-20170622124052-a52f23424492 // indirect

@@ -1,8 +1,8 @@
 package service
 
 import (
-	internalmodel "github.com/callistaenterprise/goblog/accountservice/internal/app/model"
-	"github.com/callistaenterprise/goblog/common/model"
+	internalmodel "github.com/aclk/goblog/accountservice/internal/app/model"
+	"github.com/aclk/goblog/common/model"
 	"github.com/graphql-go/graphql"
 	"github.com/sirupsen/logrus"
 	"log"

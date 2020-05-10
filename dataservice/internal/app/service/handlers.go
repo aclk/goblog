@@ -2,9 +2,9 @@ package service
 
 import (
 	"encoding/json"
-	"github.com/callistaenterprise/goblog/common/model"
-	"github.com/callistaenterprise/goblog/common/util"
-	"github.com/callistaenterprise/goblog/dataservice/internal/app/dbclient"
+	"github.com/aclk/goblog/common/model"
+	"github.com/aclk/goblog/common/util"
+	"github.com/aclk/goblog/dataservice/internal/app/dbclient"
 	"github.com/go-chi/chi"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"

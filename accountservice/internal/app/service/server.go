@@ -1,9 +1,9 @@
 package service
 
 import (
-	"github.com/callistaenterprise/goblog/accountservice/cmd"
-	"github.com/callistaenterprise/goblog/common/monitoring"
-	"github.com/callistaenterprise/goblog/common/tracing"
+	"github.com/aclk/goblog/accountservice/cmd"
+	"github.com/aclk/goblog/common/monitoring"
+	"github.com/aclk/goblog/common/tracing"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	gqlhandler "github.com/graphql-go/graphql-go-handler"

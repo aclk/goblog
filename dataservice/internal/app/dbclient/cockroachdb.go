@@ -3,9 +3,9 @@ package dbclient
 import (
 	"context"
 	"fmt"
-	"github.com/callistaenterprise/goblog/common/model"
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/dataservice/cmd"
+	"github.com/aclk/goblog/common/model"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/dataservice/cmd"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/sirupsen/logrus"

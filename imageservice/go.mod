@@ -1,10 +1,12 @@
-module github.com/callistaenterprise/goblog/imageservice
+module github.com/aclk/goblog/imageservice
 
-go 1.12
+go 1.13
+
+replace github.com/aclk/goblog/common => /Users/arvin.he/go/src/github.com/aclk/goblog/common
 
 require (
+	github.com/aclk/goblog/common v0.0.0-20190715225607-7a8cb3c11b96
 	github.com/alexflint/go-arg v1.0.0
-	github.com/callistaenterprise/goblog/common v0.0.0-20190715225607-7a8cb3c11b96
 	github.com/disintegration/gift v1.2.0
 	github.com/go-chi/chi v4.0.2+incompatible
 	github.com/gorilla/mux v1.6.2

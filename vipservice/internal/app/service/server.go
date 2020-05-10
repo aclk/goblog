@@ -1,9 +1,9 @@
 package service
 
 import (
-	"github.com/callistaenterprise/goblog/common/monitoring"
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/vipservice/cmd"
+	"github.com/aclk/goblog/common/monitoring"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/vipservice/cmd"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/prometheus/client_golang/prometheus/promhttp"

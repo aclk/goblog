@@ -12,9 +12,9 @@ import (
 	"time"
 
 	"fmt"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/common/util"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/common/util"
 	"github.com/eapache/go-resiliency/retrier"
 	"github.com/sirupsen/logrus"
 )

@@ -2,11 +2,11 @@ package dbclient
 
 import (
 	"fmt"
-	"github.com/callistaenterprise/goblog/imageservice/cmd"
+	"github.com/aclk/goblog/imageservice/cmd"
 	"strconv"
 
 	"context"
-	"github.com/callistaenterprise/goblog/common/model"
+	"github.com/aclk/goblog/common/model"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/sirupsen/logrus"

@@ -24,14 +24,14 @@ SOFTWARE.
 package main
 
 import (
+	"github.com/aclk/goblog/imageservice/cmd"
 	"github.com/alexflint/go-arg"
-	"github.com/callistaenterprise/goblog/imageservice/cmd"
 	"sync"
 	"time"
 
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/imageservice/internal/app/dbclient"
-	"github.com/callistaenterprise/goblog/imageservice/internal/app/service"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/imageservice/internal/app/dbclient"
+	"github.com/aclk/goblog/imageservice/internal/app/service"
 	"github.com/sirupsen/logrus"
 	"os"
 	"os/signal"

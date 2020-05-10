@@ -2,7 +2,7 @@ package service
 
 import (
 	"encoding/json"
-	"github.com/callistaenterprise/goblog/common/messaging"
+	"github.com/aclk/goblog/common/messaging"
 	"github.com/go-chi/chi"
 	"net/http"
 	"strconv"
@@ -12,11 +12,11 @@ import (
 
 	"bytes"
 	"fmt"
-	internalmodel "github.com/callistaenterprise/goblog/accountservice/internal/app/model"
-	cb "github.com/callistaenterprise/goblog/common/circuitbreaker"
-	"github.com/callistaenterprise/goblog/common/model"
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/common/util"
+	internalmodel "github.com/aclk/goblog/accountservice/internal/app/model"
+	cb "github.com/aclk/goblog/common/circuitbreaker"
+	"github.com/aclk/goblog/common/model"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/common/util"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 )
