@@ -1,4 +1,4 @@
-package se.callistaenterprise.goblog
+package se.aclk.goblog
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._

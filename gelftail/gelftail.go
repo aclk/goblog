@@ -3,13 +3,14 @@ package main
 import (
 	"encoding/json"
 	"flag"
-	"github.com/Sirupsen/logrus"
-	"github.com/callistaenterprise/goblog/gelftail/aggregator"
-	"github.com/callistaenterprise/goblog/gelftail/transformer"
 	"io/ioutil"
 	"net"
 	"os"
 	"sync"
+
+	"github.com/aclk/goblog/gelftail/aggregator"
+	"github.com/aclk/goblog/gelftail/transformer"
+	"github.com/sirupsen/logrus"
 )
 
 var authToken = ""

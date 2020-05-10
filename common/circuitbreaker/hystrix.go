@@ -10,12 +10,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Sirupsen/logrus"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/common/util"
 	"github.com/afex/hystrix-go/hystrix"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/common/util"
 	"github.com/eapache/go-resiliency/retrier"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 

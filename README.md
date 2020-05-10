@@ -12,16 +12,17 @@ Make sure Turbine doesn't crash on startup due to AMQ connection problem.
     docker-machine create --driver virtualbox --virtualbox-cpu-count 2 --virtualbox-memory 2048 --virtualbox-disk-size 20000 swarm-manager-0
     eval "$(docker-machine env swarm-manager-0)"
     docker network create --driver overlay my_network
-    docker swarm init --advertise-addr 192.168.99.100
-    
-    
+    docker swarm init --advertise-addr 192.168.99.100 --listen-addr $(docker-machine ip swarm-manager-0):2377
+
+	docker swarm join-token manager
+
 ### Deploy spring cloud services
 
 From /goblog
 
     ./springcloud.sh
     ./support.sh
-    
+
 ### Deploy microservices
 
     ./copyall.sh

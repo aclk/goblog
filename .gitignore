@@ -45,4 +45,7 @@ imageservice/imageservice
 build
 .gradle
 
-token.txt
+*/target/*
+.classpath
+.settings
+.project

@@ -25,14 +25,15 @@ package main
 
 import (
 	"flag"
-	"github.com/Sirupsen/logrus"
-	"github.com/callistaenterprise/goblog/common/config"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/callistaenterprise/goblog/common/tracing"
-	"github.com/callistaenterprise/goblog/imageservice/service"
-	"github.com/spf13/viper"
 	"sync"
 	"time"
+
+	"github.com/aclk/goblog/common/config"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/imageservice/service"
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 var appName = "imageservice"

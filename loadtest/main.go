@@ -13,9 +13,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/Sirupsen/logrus"
 	"net/url"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 var Log = logrus.New()
@@ -139,7 +140,7 @@ func standardTest() {
 		serviceUrl := url + strconv.Itoa(accountId)
 
 		var DefaultTransport http.RoundTripper = &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			TLSClientConfig:   &tls.Config{InsecureSkipVerify: true},
 			DisableKeepAlives: false,
 		}
 		req, _ := http.NewRequest("GET", serviceUrl, nil)
@@ -150,9 +151,9 @@ func standardTest() {
 		}
 		body, _ := ioutil.ReadAll(resp.Body)
 		json.Unmarshal(body, &m)
-		quote :=  m["quote"].(map[string]interface{})["quote"].(string)
+		quote := m["quote"].(map[string]interface{})["quote"].(string)
 		quoteIp := m["quote"].(map[string]interface{})["ipAddress"].(string)
-		quoteIp = quoteIp[strings.IndexRune(quoteIp, '/') + 1 :]
+		quoteIp = quoteIp[strings.IndexRune(quoteIp, '/')+1:]
 
 		imageUrl := m["imageData"].(map[string]interface{})["url"].(string)
 		imageServedBy := m["imageData"].(map[string]interface{})["servedBy"].(string)

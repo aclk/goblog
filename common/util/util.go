@@ -2,10 +2,11 @@ package util
 
 import (
 	"fmt"
-	"github.com/Sirupsen/logrus"
 	"io/ioutil"
 	"net"
 	"strings"
+
+	"github.com/sirupsen/logrus"
 )
 
 // ResolveIPFromHostsFile reads the final IP address of the /etc/hosts file. Works for docker, typically at least...

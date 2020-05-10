@@ -6,15 +6,16 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/callistaenterprise/goblog/accountservice/dbclient"
-	"github.com/callistaenterprise/goblog/accountservice/model"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/callistaenterprise/goblog/common/util"
-	"github.com/gorilla/mux"
-	cb "github.com/callistaenterprise/goblog/common/circuitbreaker"
 	"context"
-	"github.com/callistaenterprise/goblog/common/tracing"
+
+	"github.com/aclk/goblog/accountservice/dbclient"
+	"github.com/aclk/goblog/accountservice/model"
+	cb "github.com/aclk/goblog/common/circuitbreaker"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/aclk/goblog/common/util"
+	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
 )
 
 // DBClient instance for accessing the underlying BoltDB, be it the real one or a mock.
@@ -28,9 +29,9 @@ var isHealthy = true
 var client = &http.Client{}
 
 var fallbackQuote = model.Quote{
-	Language:"en",
+	Language: "en",
 	ServedBy: "circuit-breaker",
-	Text: "May the source be with you, always."}
+	Text:     "May the source be with you, always."}
 
 func init() {
 	var transport http.RoundTripper = &http.Transport{
@@ -38,11 +39,11 @@ func init() {
 	}
 	client.Transport = transport
 	cb.Client = *client
-        var err error
-        myIp, err = util.ResolveIPFromHostsFile()
-        if err != nil {
-                myIp = util.GetIP()
-        }
+	var err error
+	myIp, err = util.ResolveIPFromHostsFile()
+	if err != nil {
+		myIp = util.GetIP()
+	}
 }
 
 // GetAccount loads an account instance, including a quote and an image URL using sub-services.
@@ -52,7 +53,7 @@ func GetAccount(w http.ResponseWriter, r *http.Request) {
 	var accountID = mux.Vars(r)["accountId"]
 
 	// Read the account struct BoltDB
-        account, err := DBClient.QueryAccount(r.Context(), accountID)
+	account, err := DBClient.QueryAccount(r.Context(), accountID)
 	account.ServedBy = myIp
 
 	// If err, return a 404
@@ -64,7 +65,7 @@ func GetAccount(w http.ResponseWriter, r *http.Request) {
 
 	notifyVIP(r.Context(), account) // Send VIP notification concurrently.
 
-        account.Quote = getQuote(r.Context())
+	account.Quote = getQuote(r.Context())
 	account.ImageData = getImageURL(r.Context(), accountID)
 
 	// If found, marshal into JSON, write headers and content
@@ -83,45 +84,45 @@ func notifyVIP(ctx context.Context, account model.Account) {
 			if err != nil {
 				logrus.Errorln(err.Error())
 			}
-                        tracing.LogEventToOngoingSpan(ctx, "Sent VIP message")
+			tracing.LogEventToOngoingSpan(ctx, "Sent VIP message")
 		}(account)
 
 	}
 }
 
-func getQuote(ctx context.Context) (model.Quote) {
-        // Start a new opentracing child span
-        child := tracing.StartSpanFromContextWithLogEvent(ctx, "getQuote", "Client send")
-        defer tracing.CloseSpan(child, "Client Receive")
+func getQuote(ctx context.Context) model.Quote {
+	// Start a new opentracing child span
+	child := tracing.StartSpanFromContextWithLogEvent(ctx, "getQuote", "Client send")
+	defer tracing.CloseSpan(child, "Client Receive")
 
-        // Create the http request and pass it to the circuit breaker
-        req, err := http.NewRequest("GET", "http://quotes-service:8080/api/quote?strength=4", nil)
+	// Create the http request and pass it to the circuit breaker
+	req, err := http.NewRequest("GET", "http://quotes-service:8080/api/quote?strength=4", nil)
 	body, err := cb.PerformHTTPRequestCircuitBreaker(tracing.UpdateContext(ctx, child), "quotes-service", req)
-        if err == nil {
-        	quote := model.Quote{}
+	if err == nil {
+		quote := model.Quote{}
 		json.Unmarshal(body, &quote)
 		return quote
 	}
-        return fallbackQuote
+	return fallbackQuote
 }
 
-func getImageURL(ctx context.Context, accountID string) (model.AccountImage) {
-        child := tracing.StartSpanFromContextWithLogEvent(ctx, "getImageUrl", "Client send")
-        defer tracing.CloseSpan(child, "Client Receive")
+func getImageURL(ctx context.Context, accountID string) model.AccountImage {
+	child := tracing.StartSpanFromContextWithLogEvent(ctx, "getImageUrl", "Client send")
+	defer tracing.CloseSpan(child, "Client Receive")
 
-        req, err := http.NewRequest("GET", "http://imageservice:7777/accounts/" + accountID, nil)
-        body, err := cb.PerformHTTPRequestCircuitBreaker(tracing.UpdateContext(ctx, child), "imageservice", req)
-        if err == nil {
-                accountImage := model.AccountImage{}
+	req, err := http.NewRequest("GET", "http://imageservice:7777/accounts/"+accountID, nil)
+	body, err := cb.PerformHTTPRequestCircuitBreaker(tracing.UpdateContext(ctx, child), "imageservice", req)
+	if err == nil {
+		accountImage := model.AccountImage{}
 		err := json.Unmarshal(body, &accountImage)
-                if err == nil {
-                        return accountImage
-                } else {
-                        panic("Unmarshalling accountImage struct went really bad. Msg: " + err.Error())
-                }
+		if err == nil {
+			return accountImage
+		} else {
+			panic("Unmarshalling accountImage struct went really bad. Msg: " + err.Error())
+		}
 
 	}
-        return model.AccountImage{URL: "http://path.to.placeholder", ServedBy: "fallback"}
+	return model.AccountImage{URL: "http://path.to.placeholder", ServedBy: "fallback"}
 }
 
 // HealthCheck will return OK if the underlying BoltDB is healthy. At least healthy enough for demoing purposes.

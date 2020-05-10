@@ -1,9 +1,10 @@
 package service
 
 import (
-	"github.com/gorilla/mux"
 	"net/http"
-        "github.com/callistaenterprise/goblog/common/tracing"
+
+	"github.com/aclk/goblog/common/tracing"
+	"github.com/gorilla/mux"
 )
 
 // NewRouter creates a mux.Router pointer.
@@ -23,8 +24,8 @@ func NewRouter() *mux.Router {
 
 func loadTracing(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
-                span := tracing.StartHTTPTrace(req, "GetAccount")
-                defer span.Finish()
+		span := tracing.StartHTTPTrace(req, "GetAccount")
+		defer span.Finish()
 
 		ctx := tracing.UpdateContext(req.Context(), span)
 		next.ServeHTTP(rw, req.WithContext(ctx))

@@ -2,7 +2,7 @@
 
 # Config Server
 cd support/config-server
-./gradlew build
+./gradlew clean build
 cd ../..
 docker build -t someprefix/configserver support/config-server/
 docker service rm configserver
