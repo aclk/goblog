@@ -6,6 +6,7 @@
 # Folders
 _obj
 _test
+*/target/*
 
 # Architecture specific extensions/prefixes
 *.[568vq]
@@ -40,5 +41,8 @@ gelftail/gelftail-linux-amd64
 
 build
 .gradle
+.classpath
+.settings
+.project
 
-token.txt
+# token.txt
