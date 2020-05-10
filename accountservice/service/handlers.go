@@ -6,13 +6,13 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/callistaenterprise/goblog/accountservice/dbclient"
-	"github.com/callistaenterprise/goblog/accountservice/model"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/callistaenterprise/goblog/common/util"
+	"github.com/aclk/goblog/accountservice/dbclient"
+	"github.com/aclk/goblog/accountservice/model"
+	cb "github.com/aclk/goblog/common/circuitbreaker"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/aclk/goblog/common/util"
 	"github.com/gorilla/mux"
-	cb "github.com/callistaenterprise/goblog/common/circuitbreaker"
+	"github.com/sirupsen/logrus"
 )
 
 var DBClient dbclient.IBoltClient
@@ -22,9 +22,9 @@ var isHealthy = true
 var client = &http.Client{}
 
 var fallbackQuote = model.Quote{
-	Language:"en",
+	Language: "en",
 	ServedBy: "circuit-breaker",
-	Text: "May the source be with you, always."}
+	Text:     "May the source be with you, always."}
 
 func init() {
 	var transport http.RoundTripper = &http.Transport{
@@ -51,7 +51,7 @@ func GetAccount(w http.ResponseWriter, r *http.Request) {
 
 	notifyVIP(account) // Send VIP notification concurrently.
 
-        account.Quote = getQuote()
+	account.Quote = getQuote()
 	account.ImageUrl = getImageUrl(accountId)
 
 	// If found, marshal into JSON, write headers and content
@@ -74,10 +74,10 @@ func notifyVIP(account model.Account) {
 	}
 }
 
-func getQuote() (model.Quote) {
+func getQuote() model.Quote {
 	body, err := cb.CallUsingCircuitBreaker("quotes-service", "http://quotes-service:8080/api/quote?strength=13", "GET")
-        if err == nil {
-        	quote := model.Quote{}
+	if err == nil {
+		quote := model.Quote{}
 		json.Unmarshal(body, &quote)
 		return quote
 	} else {
@@ -85,9 +85,9 @@ func getQuote() (model.Quote) {
 	}
 }
 
-func getImageUrl(accountId string) (string) {
-        body, err := cb.CallUsingCircuitBreaker("imageservice", "http://imageservice:7777/accounts/" + accountId, "GET")
-        if err == nil {
+func getImageUrl(accountId string) string {
+	body, err := cb.CallUsingCircuitBreaker("imageservice", "http://imageservice:7777/accounts/"+accountId, "GET")
+	if err == nil {
 		return string(body)
 	} else {
 		return "http://path.to.placeholder"

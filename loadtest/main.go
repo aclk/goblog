@@ -13,8 +13,9 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/Sirupsen/logrus"
 	"net/url"
+
+	"github.com/sirupsen/logrus"
 )
 
 var Log = logrus.New()
@@ -27,7 +28,7 @@ func main() {
 	usersPtr := flag.Int("users", 10, "Number of users")
 	delayPtr := flag.Int("delay", 1000, "Delay between calls per user")
 	zuulPtr := flag.Bool("zuul", true, "Route traffic through zuul")
-	baseAddrPtr := flag.String("baseAddr", "192.168.99.100", "Base address of your Swarm cluster")
+	baseAddrPtr := flag.String("baseAddr", "192.168.1.3", "Base address of your Swarm cluster")
 
 	flag.Parse()
 

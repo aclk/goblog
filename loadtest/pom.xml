@@ -2,7 +2,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>se.callistaenterprise.goblog</groupId>
+	<groupId>se.aclk.goblog</groupId>
 	<artifactId>loadtest</artifactId>
 	<version>1.0-SNAPSHOT</version>
 

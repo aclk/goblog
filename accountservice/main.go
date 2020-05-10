@@ -2,16 +2,17 @@ package main
 
 import (
 	"flag"
-	"github.com/Sirupsen/logrus"
-	"github.com/callistaenterprise/goblog/accountservice/dbclient"
-	"github.com/callistaenterprise/goblog/accountservice/service"
-	cb "github.com/callistaenterprise/goblog/common/circuitbreaker"
-	"github.com/callistaenterprise/goblog/common/config"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/spf13/viper"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/aclk/goblog/accountservice/dbclient"
+	"github.com/aclk/goblog/accountservice/service"
+	cb "github.com/aclk/goblog/common/circuitbreaker"
+	"github.com/aclk/goblog/common/config"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 var appName = "accountservice"
@@ -30,7 +31,7 @@ func init() {
 
 func main() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
-        logrus.Infof("Starting %v\n", appName)
+	logrus.Infof("Starting %v\n", appName)
 
 	config.LoadConfigurationFromBranch(
 		viper.GetString("configServerUrl"),

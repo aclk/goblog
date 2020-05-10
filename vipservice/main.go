@@ -26,15 +26,16 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/Sirupsen/logrus"
-	"github.com/callistaenterprise/goblog/common/config"
-	"github.com/callistaenterprise/goblog/common/messaging"
-	"github.com/callistaenterprise/goblog/vipservice/service"
-	"github.com/spf13/viper"
-	"github.com/streadway/amqp"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/aclk/goblog/common/config"
+	"github.com/aclk/goblog/common/messaging"
+	"github.com/aclk/goblog/vipservice/service"
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
+	"github.com/streadway/amqp"
 )
 
 var appName = "vipservice"

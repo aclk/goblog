@@ -1,15 +1,16 @@
 package service
 
 import (
-	"net/http"
-	"image"
-	"fmt"
-	"strconv"
-	"os"
 	"bytes"
+	"fmt"
+	"image"
+	"net/http"
+	"os"
+	"strconv"
+
+	"github.com/aclk/goblog/common/messaging"
 	"github.com/gorilla/mux"
-	"github.com/callistaenterprise/goblog/common/messaging"
-        "github.com/Sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 )
 
 var MessagingClient messaging.IMessagingClient
@@ -76,7 +77,6 @@ func writeAndReturn(w http.ResponseWriter, sourceImage image.Image) {
 	w.Write(outputData)
 
 }
-
 
 func writeServerError(w http.ResponseWriter, msg string) {
 	logrus.Error(msg)

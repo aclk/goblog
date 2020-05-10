@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/callistaenterprise/goblog/accountservice/dbclient"
-	"github.com/callistaenterprise/goblog/accountservice/model"
-	"github.com/callistaenterprise/goblog/common/messaging"
+	"github.com/aclk/goblog/accountservice/dbclient"
+	"github.com/aclk/goblog/accountservice/model"
+	"github.com/aclk/goblog/common/messaging"
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/mock"
 	"gopkg.in/h2non/gock.v1"

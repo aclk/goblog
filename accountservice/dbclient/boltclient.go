@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strconv"
 
-	logrus "github.com/Sirupsen/logrus"
+	"github.com/aclk/goblog/accountservice/model"
 	"github.com/boltdb/bolt"
-	"github.com/callistaenterprise/goblog/accountservice/model"
+	logrus "github.com/sirupsen/logrus"
 )
 
 type IBoltClient interface {
