@@ -4,7 +4,7 @@ go 1.12
 
 replace github.com/Sirupsen/logrus v1.4.2 => github.com/sirupsen/logrus v1.4.2
 
-replace github.com/aclk/goblog/common => /Users/arvin.he/go/src/github.com/aclk/goblog/common
+replace github.com/aclk/goblog/common => /Users/vk/work/go/src/github.com/aclk/goblog/common
 
 require (
 	github.com/aclk/goblog/common v0.0.0-20190723162557-085a94bc23ae

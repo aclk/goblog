@@ -2,7 +2,7 @@ module github.com/aclk/goblog/imageservice
 
 go 1.13
 
-replace github.com/aclk/goblog/common => /Users/arvin.he/go/src/github.com/aclk/goblog/common
+replace github.com/aclk/goblog/common => /Users/vk/work/go/src/github.com/aclk/goblog/common
 
 require (
 	github.com/aclk/goblog/common v0.0.0-20190715225607-7a8cb3c11b96
