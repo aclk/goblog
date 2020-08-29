@@ -2,7 +2,7 @@
 export GOOS=linux
 export CGO_ENABLED=0
 
-cd swarm-prometheus-discovery;go get;go build -o swarm-prometheus-discovery-linux-amd64;echo built `pwd`;cd ..
+cd swarm-prometheus-discovery || exit;go get;go build -o bin/swarm-prometheus-discovery-linux-amd64;echo built `pwd`;cd ..
 
 export GOOS=darwin
 

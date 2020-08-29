@@ -20,8 +20,11 @@ type AmqpConfig struct {
 
 func DefaultConfiguration() *Config {
 	return &Config{
-		Environment:        "dev",
+		Environment: "dev",
 		CockroachdbConnUrl: "postgresql://cockroachdb1:26257/account?sslmode=disable",
+		//CockroachdbConnUrl: "host=cockroachdb1 port=26257 user=root dbname=account sslmode=disable",
+		//CockroachdbConnUrl: "host=cockroachdb1 port=26257 user=account dbname=account password=password sslmode=disable",
+		//CockroachdbConnUrl: "host=192.168.99.130 port=26257 user=root dbname=account sslmode=disable",
 		ZipkinServerUrl:    "http://zipkin:9411",
 		ServerConfig: ServerConfig{
 			Name: "dataservice",

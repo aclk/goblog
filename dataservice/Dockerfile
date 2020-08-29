@@ -10,10 +10,10 @@ RUN apk --update add \
 	ca-certificates \
 	&& rm -rf /var/cache/apk/*
 
-ENV TZ=Europe/Stockholm
+ENV TZ=Asia/Shanghai
 
-ADD bin/dataservice /
+ADD bin/dataservice-linux-amd64 /
 
 HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=5 CMD curl -sSf http://127.0.0.1:7070/health
 
-ENTRYPOINT ["./dataservice"]
+ENTRYPOINT ["./dataservice-linux-amd64"]

@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/aclk/goblog/common/tracing"
+	"os"
+	"os/signal"
+	"syscall"
+
 	"github.com/aclk/goblog/dataservice/cmd"
 	"github.com/aclk/goblog/dataservice/internal/app/dbclient"
 	"github.com/aclk/goblog/dataservice/internal/app/service"
 	"github.com/alexflint/go-arg"
 	"github.com/sirupsen/logrus"
-	"os"
-	"os/signal"
-	"syscall"
 )
 
 var appName = "dataservice"
@@ -24,16 +24,12 @@ func main() {
 
 	server := service.NewServer(service.NewHandler(dbclient.NewGormClient(cfg)), cfg)
 	server.SetupRoutes()
-	initializeTracing(cfg)
 
 	handleSigterm(func() {
 		logrus.Infoln("Captured Ctrl+C")
 		server.Close()
 	})
 	server.Start()
-}
-func initializeTracing(cfg *cmd.Config) {
-	tracing.InitTracing(cfg.ZipkinServerUrl, appName)
 }
 
 // Handles Ctrl+C or most other means of "controlled" shutdown gracefully. Invokes the supplied func before exiting.

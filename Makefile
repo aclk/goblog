@@ -62,8 +62,8 @@ edge-server:
 
 cockroachdb:
 	docker service rm cockroachdb1 || true
-	docker service create --name=cockroachdb1 --label cockroachdb --network=my_network -p 26257:26257 -p 3030:8080 --mount type=volume,source=cockroach-data1,target=/cockroach/cockroach-data cockroachdb/cockroach:v19.1.2 start --insecure
+	docker service create --name=cockroachdb1 --label cockroachdb --network=my_network -p 26257:26257 -p 3030:8080 --mount type=volume,source=cockroach-data1,target=/cockroach/cockroach-data cockroachdb/cockroach:latest start --insecure
 	docker service rm cockroachdb2 || true
-	docker service create --name=cockroachdb2 --label cockroachdb --network=my_network --mount type=volume,source=cockroach-data2,target=/cockroach/cockroach-data cockroachdb/cockroach:v19.1.2 start --insecure --join=cockroachdb1
+	docker service create --name=cockroachdb2 --label cockroachdb --network=my_network --mount type=volume,source=cockroach-data2,target=/cockroach/cockroach-data cockroachdb/cockroach:latest start --insecure --join=cockroachdb1
 	docker service rm cockroachdb3 || true
-	docker service create --name=cockroachdb3 --label cockroachdb --network=my_network --mount type=volume,source=cockroach-data3,target=/cockroach/cockroach-data cockroachdb/cockroach:v19.1.2 start --insecure --join=cockroachdb1
+	docker service create --name=cockroachdb3 --label cockroachdb --network=my_network --mount type=volume,source=cockroach-data3,target=/cockroach/cockroach-data cockroachdb/cockroach:latest start --insecure --join=cockroachdb1

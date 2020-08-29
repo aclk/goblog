@@ -3,20 +3,20 @@ package circuitbreaker
 import (
 	"context"
 	"encoding/json"
-	"github.com/afex/hystrix-go/hystrix"
-	"github.com/spf13/viper"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net"
 	"net/http"
 	"time"
 
-	"fmt"
 	"github.com/aclk/goblog/common/messaging"
 	"github.com/aclk/goblog/common/tracing"
 	"github.com/aclk/goblog/common/util"
+	"github.com/afex/hystrix-go/hystrix"
 	"github.com/eapache/go-resiliency/retrier"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 )
 
 func init() {

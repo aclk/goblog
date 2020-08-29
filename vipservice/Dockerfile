@@ -10,10 +10,10 @@ RUN apk --update add \
 	ca-certificates \
 	&& rm -rf /var/cache/apk/*
 
-ENV TZ=Europe/Stockholm
+ENV TZ=Asia/Shanghai
 
-ADD bin/vipservice /
+ADD bin/vipservice-linux-amd64 /
 
 HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=5 CMD curl -sSf http://127.0.0.1:6868/health
 
-ENTRYPOINT ["./vipservice"]
+ENTRYPOINT ["./vipservice-linux-amd64"]

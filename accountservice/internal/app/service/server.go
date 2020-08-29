@@ -1,6 +1,10 @@
 package service
 
 import (
+	"net/http"
+	"strconv"
+	"time"
+
 	"github.com/aclk/goblog/accountservice/cmd"
 	"github.com/aclk/goblog/common/monitoring"
 	"github.com/aclk/goblog/common/tracing"
@@ -9,9 +13,6 @@ import (
 	gqlhandler "github.com/graphql-go/graphql-go-handler"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
-	"net/http"
-	"strconv"
-	"time"
 )
 
 type Server struct {

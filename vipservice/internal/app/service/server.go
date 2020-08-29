@@ -1,6 +1,10 @@
 package service
 
 import (
+	"net/http"
+	"strconv"
+	"time"
+
 	"github.com/aclk/goblog/common/monitoring"
 	"github.com/aclk/goblog/common/tracing"
 	"github.com/aclk/goblog/vipservice/cmd"
@@ -8,9 +12,6 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
-	"net/http"
-	"strconv"
-	"time"
 )
 
 type Server struct {
@@ -43,7 +44,6 @@ func (s *Server) SetupRoutes() {
 	s.r.Use(middleware.Logger)
 	s.r.Use(middleware.Recoverer)
 	s.r.Use(middleware.Timeout(time.Minute))
-	s.r.Use(Tracing)
 
 	s.r.Get("/health", func(rw http.ResponseWriter, req *http.Request) {
 		rw.Write([]byte("OK"))
@@ -73,12 +73,16 @@ func Monitor(serviceName, routeName, signature string) func(http.Handler) http.H
 	}
 }
 
-func Tracing(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
-		span := tracing.StartHTTPTrace(req, req.RequestURI)
-		defer span.Finish()
+func Trace(opName string) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+			logrus.Infof("starting span for %v", opName)
+			span := tracing.StartHTTPTrace(req, opName)
+			ctx := tracing.UpdateContext(req.Context(), span)
+			next.ServeHTTP(rw, req.WithContext(ctx))
 
-		ctx := tracing.UpdateContext(req.Context(), span)
-		next.ServeHTTP(rw, req.WithContext(ctx))
-	})
+			span.Finish()
+			logrus.Infof("finished span for %v", opName)
+		})
+	}
 }

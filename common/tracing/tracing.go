@@ -3,11 +3,12 @@ package tracing
 import (
 	"context"
 	"fmt"
+	"net/http"
+
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	zipkin "github.com/openzipkin/zipkin-go-opentracing"
 	"github.com/sirupsen/logrus"
-	"net/http"
 )
 
 // Tracer instance

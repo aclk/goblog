@@ -1,4 +1,4 @@
-FROM cockroachdb/cockroach:v19.1.2
+FROM cockroachdb/cockroach:latest
 
 COPY init.sh /cockroach
 

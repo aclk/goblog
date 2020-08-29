@@ -14,8 +14,8 @@ Make sure Turbine doesn't crash on startup due to AMQ connection problem.
 
     docker-machine create --driver virtualbox --virtualbox-cpu-count 4 --virtualbox-memory 6000 --virtualbox-disk-size 30000 swarm-manager-0
     eval "$(docker-machine env swarm-manager-0)"
+    docker swarm init --advertise-addr $(docker-machine ip swarm-manager-0)
     docker network create --driver overlay my_network
-    docker swarm init --advertise-addr 192.168.99.100
 
 ##### Adding a worker node
 
@@ -60,3 +60,25 @@ Originally from: https://github.com/cockroachdb/cockroach/issues/19826#issuecomm
     GRANT ALL ON DATABASE account TO cockroach;
 
 // DROP USER IF EXISTS cockroach; DROP DATABASE IF EXISTS account CASCADE; CREATE DATABASE IF NOT EXISTS account; CREATE USER cockroach WITH PASSWORD 'password'; GRANT ALL ON DATABASE account TO cockroach;
+
+BUILD THE KEYSTORE
+To use encrypted properties later on, we’ll configure the config server with a self-signed certificate. (You’ll need to have keytool on your PATH).
+
+In the /goblog/support/config-server/ folder, run:
+
+```shell
+keytool -genkeypair -alias goblogkey -keyalg RSA -dname "CN=Go Blog,OU=Unit,O=Organization,L=City,S=State,C=SE" -keypass changeme -keystore server.jks -storepass letmein -validity 730
+```
+
+This should create server.jks. Feel free to modify any properties/passwords, just remember to update application.yml accordingly!
+
+`shell
+sudo sed -i "s|EXTRA_ARGS='|EXTRA_ARGS='--registry-mirror=https://www.daocloud.io/mirror |g" /var/lib/boot2docker/profile
+`
+
+docker-machine create -d virtualbox \
+    --engine-env HTTP_PROXY=http://example.com:8080 \
+    --engine-env HTTPS_PROXY=https://example.com:8080 \
+    --engine-env NO_PROXY=example2.com \
+    default
+

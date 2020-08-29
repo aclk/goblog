@@ -1,24 +1,23 @@
 package service
 
 import (
+	"bytes"
+	"context"
 	"encoding/json"
-	"github.com/aclk/goblog/common/messaging"
-	"github.com/go-chi/chi"
+	"fmt"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 	"time"
 
-	"context"
-
-	"bytes"
-	"fmt"
 	internalmodel "github.com/aclk/goblog/accountservice/internal/app/model"
 	cb "github.com/aclk/goblog/common/circuitbreaker"
+	"github.com/aclk/goblog/common/messaging"
 	"github.com/aclk/goblog/common/model"
 	"github.com/aclk/goblog/common/tracing"
 	"github.com/aclk/goblog/common/util"
+	"github.com/go-chi/chi"
 	"github.com/sirupsen/logrus"
-	"io/ioutil"
 )
 
 type Handler struct {

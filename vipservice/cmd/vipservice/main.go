@@ -25,6 +25,11 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+
 	"github.com/aclk/goblog/common/messaging"
 	"github.com/aclk/goblog/common/tracing"
 	"github.com/aclk/goblog/vipservice/cmd"
@@ -32,15 +37,9 @@ import (
 	"github.com/alexflint/go-arg"
 	"github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"
-	"os"
-	"os/signal"
-	"syscall"
-	"time"
 )
 
 var appName = "vipservice"
-
-var messagingClient messaging.IMessagingClient
 
 func main() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
@@ -54,12 +53,15 @@ func main() {
 	srv.SetupRoutes()
 
 	initializeTracing(cfg)
-	initializeMessaging(cfg)
+	mc := initializeMessaging(cfg)
 
 	// Makes sure connection is closed when service exits.
 	handleSigterm(func() {
-		if messagingClient != nil {
-			messagingClient.Close()
+		if mc != nil {
+			mc.Close()
+		}
+		if srv != nil {
+			srv.Close()
 		}
 	})
 	srv.Start()
@@ -91,18 +93,19 @@ func onMessage(delivery amqp.Delivery) {
 	time.Sleep(time.Millisecond * 10)
 }
 
-func initializeMessaging(cfg *cmd.Config) {
+func initializeMessaging(cfg *cmd.Config) messaging.IMessagingClient {
 	if cfg.AmqpConfig.ServerUrl == "" {
 		panic("No 'broker_url' set in configuration, cannot start")
 	}
-	messagingClient = &messaging.AmqpClient{}
-	messagingClient.ConnectToBroker(cfg.AmqpConfig.ServerUrl)
+	mc := &messaging.AmqpClient{}
+	mc.ConnectToBroker(cfg.AmqpConfig.ServerUrl)
 
 	// Call the subscribe method with queue name and callback function
-	err := messagingClient.SubscribeToQueue("vip_queue", appName, onMessage)
+	err := mc.SubscribeToQueue("vip_queue", appName, onMessage)
 	failOnError(err, "Could not start subscribe to vip_queue")
 
 	logrus.Infoln("Successfully initialized messaging for vipservice")
+	return mc
 }
 
 // Handles Ctrl+C or most other means of "controlled" shutdown gracefully. Invokes the supplied func before exiting.

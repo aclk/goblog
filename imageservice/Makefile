@@ -13,7 +13,7 @@ $(executable):
 
 build:
 	@echo Building $(executable)
-	GOOS=linux GO111MODULE=on go build -o bin/$(executable) cmd/$(executable)/main.go
+	GOOS=linux GO111MODULE=on go build -o bin/$(executable)-linux-amd64 cmd/$(executable)/main.go
 	docker build -t someprefix/$(executable) -f Dockerfile .
 
 fmt:

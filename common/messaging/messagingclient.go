@@ -1,11 +1,9 @@
 package messaging
 
 import (
+	"context"
 	"fmt"
 
-	"context"
-	"github.com/aclk/goblog/common/tracing"
-	"github.com/opentracing/opentracing-go"
 	"github.com/sirupsen/logrus"
 	"github.com/streadway/amqp"
 )
@@ -118,17 +116,6 @@ func buildMessage(ctx context.Context, body []byte) amqp.Publishing {
 	publishing := amqp.Publishing{
 		ContentType: "application/json",
 		Body:        body, // Our JSON body as []byte
-	}
-	if ctx != nil {
-		child := tracing.StartChildSpanFromContext(ctx, "messaging")
-		defer child.Finish()
-		var val = make(opentracing.TextMapCarrier)
-		err := tracing.AddTracingToTextMapCarrier(child, val)
-		if err != nil {
-			logrus.Errorf("Error injecting span context: %v", err.Error())
-		} else {
-			publishing.Headers = tracing.CarrierToMap(val)
-		}
 	}
 	return publishing
 }

@@ -3,6 +3,13 @@ package service
 import (
 	"context"
 	"encoding/json"
+	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
+	"time"
+
 	"github.com/aclk/goblog/accountservice/cmd"
 	internalmodel "github.com/aclk/goblog/accountservice/internal/app/model"
 	"github.com/aclk/goblog/common/circuitbreaker"
@@ -12,12 +19,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
 	"gopkg.in/h2non/gock.v1"
-	"io/ioutil"
-	"net/http"
-	"net/http/httptest"
-	"strings"
-	"testing"
-	"time"
 )
 
 //var mockMessagingClient *messaging.MockMessagingClient

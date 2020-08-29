@@ -48,10 +48,12 @@ dataservice/dataservice
 
 swarm-prometheus-discovery/swarm-prometheus-discovery-linux-amd64
 swarm-prometheus-discovery/swarm-prometheus-discovery
-swarm-prometheus-discovery
+
 
 build
 .gradle
+
+.idea
 
 */target/*
 .classpath

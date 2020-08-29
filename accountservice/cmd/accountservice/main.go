@@ -1,21 +1,40 @@
 package main
 
 import (
-	"github.com/aclk/goblog/accountservice/cmd"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/aclk/goblog/accountservice/cmd"
 	"github.com/aclk/goblog/accountservice/internal/app/service"
 	cb "github.com/aclk/goblog/common/circuitbreaker"
 	"github.com/aclk/goblog/common/messaging"
 	"github.com/aclk/goblog/common/tracing"
 	"github.com/alexflint/go-arg"
+	"github.com/opentracing/opentracing-go"
+	zipkinot "github.com/openzipkin-contrib/zipkin-go-opentracing"
+	zipkin "github.com/openzipkin/zipkin-go"
+	httpReporter "github.com/openzipkin/zipkin-go/reporter/http"
 	"github.com/sirupsen/logrus"
 )
 
 var appName = "accountservice"
+
+func init() {
+	logrus.SetFormatter(&logrus.JSONFormatter{})
+	reporter := httpReporter.NewReporter(cmd.DefaultConfiguration().ZipkinServerUrl)
+	ze, err := zipkin.NewEndpoint("auth-service", "localhost:9090")
+	if err != nil {
+		logrus.Info(err)
+	}
+	nativeTracer, err := zipkin.NewTracer(reporter, zipkin.WithLocalEndpoint(ze))
+	if err != nil {
+		logrus.Info(err)
+	}
+	tracer := zipkinot.Wrap(nativeTracer)
+	opentracing.InitGlobalTracer(tracer)
+}
 
 func main() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
